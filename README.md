@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## How to run
+
+In command prompt/terminal/powershell with Nodejs with NPM installed on your system, run this in the project directory:
+
+npm install
+
+Then when the install is finished run
+
+npm start
+
 ## Available Scripts
 
 In the project directory, you can run:
