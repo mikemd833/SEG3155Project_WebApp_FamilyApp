@@ -9,6 +9,14 @@ class App extends React.Component {
     this.state = {
       isLoggedIn: false
     }
+
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin = () => {
+    this.setState({
+      isLoggedIn: true
+    })
   }
 
   render() {
@@ -30,7 +38,9 @@ class App extends React.Component {
           </a>
         </header>
         }
-        <SignIn />
+        {!this.state.isLoggedIn &&
+          <SignIn onClickLogin={this.handleLogin} />
+        }
       </div>
     );
   }
