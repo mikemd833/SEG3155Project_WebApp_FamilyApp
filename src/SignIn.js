@@ -119,10 +119,17 @@ class SignIn extends React.Component {
     }
 
     handleSignUpLink = () => {
-        console.log("HandleSignUpLink");
         this.setState({ 
             isSigningIn: false,
             isSigningUp: true,
+            isForgetPassword: false
+        });
+    }
+
+    handleSignInLink = () => {
+        this.setState({ 
+            isSigningIn: true,
+            isSigningUp: false,
             isForgetPassword: false
         });
     }
@@ -161,7 +168,7 @@ class SignIn extends React.Component {
                     {this.state.isSigningUp &&
                         <Grid container>
                             <Grid item xs>
-                                <Link to="/" variant="body2">
+                                <Link to="/" onClick={this.handleSignInLink} variant="body2">
                                     {"Already have an account? Sign In"}
                                 </Link>
                             </Grid>
