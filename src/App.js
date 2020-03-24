@@ -23,8 +23,6 @@ import Box from '@material-ui/core/Box';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-  console.log("pageIndex: "+value);
-  console.log("index"+index);
   return (
     <Typography
       component="div"
