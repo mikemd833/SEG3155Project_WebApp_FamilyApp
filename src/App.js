@@ -4,7 +4,6 @@ import SignIn from './SignIn';
 import HomePage from './pages/HomePage';
 import CalendarPage from './pages/CalendarPage';
 import ChatPage from './pages/ChatPage';
-import ProfilePage from './pages/ProfilePage';
 import ShoppingListPage from './pages/ShoppingListPage';
 import ToDoPage from './pages/ToDoPage';
 import './App.css';
@@ -99,7 +98,7 @@ class App extends React.Component {
                 </AppBar>
                 <Router>
                     <TabPanel value={this.state.pageIndex} index={0}>
-                        <Redirect to="/" />
+                        <Redirect exact to="/" />
                     </TabPanel>
                     <TabPanel value={this.state.pageIndex} index={1}>
                         <Redirect to="/chat" />
