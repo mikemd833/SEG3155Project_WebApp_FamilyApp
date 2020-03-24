@@ -14,7 +14,7 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -37,12 +37,14 @@ function TabPanel(props) {
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const styles = (theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
   },
-}));
+  appBar: {
+    backgroundColor: "#2699FB",
+  }
+});
 
 class App extends React.Component {
   constructor(props) {
@@ -78,59 +80,62 @@ class App extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <div className="App">
         {!this.state.isLoggedIn &&
           <SignIn onClickLogin={this.handleLogin} />
         }
         {this.state.isLoggedIn &&
-          <Router>
-              <AppBar position="static">
-                <Tabs value={this.state.pageIndex} onChange={this.handlePageChange} aria-label="simple tabs example">
-                  <Tab label="Home" {...()=>this.a11yProps(0)} />
-                  <Tab label="Chat" {...()=>this.a11yProps(1)} />
-                  <Tab label="Calendar" {...()=>this.a11yProps(2)} />
-                  <Tab label="TODO" {...()=>this.a11yProps(3)} />
-                  <Tab label="Shopping List" {...()=>this.a11yProps(4)} />
-                </Tabs>
-              </AppBar>
-            <TabPanel value={this.state.pageIndex} index={0}>
-              <Redirect to="/" />
-            </TabPanel>
-            <TabPanel value={this.state.pageIndex} index={1}>
-              <Redirect to="/chat" />
-            </TabPanel>
-            <TabPanel value={this.state.pageIndex} index={2}>
-              <Redirect to="/calendar" />
-            </TabPanel>
-            <TabPanel value={this.state.pageIndex} index={3}>
-              <Redirect to="/toDo" />
-            </TabPanel>
-            <TabPanel value={this.state.pageIndex} index={4}>
-              <Redirect to="/shoppingList" />
-            </TabPanel>
-            <Switch>
-              <Route exact path="/">
-                <HomePage />
-              </Route>
-              <Route path="/chat">
-                <ChatPage />
-              </Route>
-              <Route path="/calendar">
-                <CalendarPage />
-              </Route>
-              <Route path="/toDo">
-                <ToDoPage />
-              </Route>
-              <Route path="/shoppingList">
-                <ShoppingListPage />
-              </Route>
-            </Switch>
-        </Router>
+            <div className={classes.root} >
+                <AppBar position="static" className={classes.appBar} >
+                    <Tabs value={this.state.pageIndex} onChange={this.handlePageChange} aria-label="simple tabs example">
+                        <Tab label="Home" {...()=>this.a11yProps(0)} />
+                        <Tab label="Chat" {...()=>this.a11yProps(1)} />
+                        <Tab label="Calendar" {...()=>this.a11yProps(2)} />
+                        <Tab label="TODO" {...()=>this.a11yProps(3)} />
+                        <Tab label="Shopping List" {...()=>this.a11yProps(4)} />
+                    </Tabs>
+                </AppBar>
+                <Router>
+                    <TabPanel value={this.state.pageIndex} index={0}>
+                        <Redirect to="/" />
+                    </TabPanel>
+                    <TabPanel value={this.state.pageIndex} index={1}>
+                        <Redirect to="/chat" />
+                    </TabPanel>
+                        <TabPanel value={this.state.pageIndex} index={2}>
+                    <Redirect to="/calendar" />
+                        </TabPanel>
+                    <TabPanel value={this.state.pageIndex} index={3}>
+                        <Redirect to="/toDo" />
+                    </TabPanel>
+                    <TabPanel value={this.state.pageIndex} index={4}>
+                        <Redirect to="/shoppingList" />
+                    </TabPanel>
+                    <Switch>
+                        <Route exact path="/">
+                            <HomePage />
+                        </Route>
+                        <Route path="/chat">
+                            <ChatPage />
+                        </Route>
+                        <Route path="/calendar">
+                            <CalendarPage />
+                        </Route>
+                        <Route path="/toDo">
+                            <ToDoPage />
+                        </Route>
+                        <Route path="/shoppingList">
+                            <ShoppingListPage />
+                        </Route>
+                    </Switch>
+                </Router>
+            </div>
         }
       </div>
     );
   }
 }
 
-export default App;
+export default withStyles(styles, { withTheme: true })(App);
