@@ -12,23 +12,71 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Redirect
 } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+  console.log("pageIndex: "+value);
+  console.log("index"+index);
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box p={3}>{children}</Box>}
+    </Typography>
+  );
+}
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      pageIndex: 0
     }
 
     this.handleLogin = this.handleLogin.bind(this);
+    this.a11yProps = this.a11yProps(this);
   }
 
   handleLogin = () => {
     this.setState({
       isLoggedIn: true
     })
+  }
+
+  a11yProps = (index) => {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
+
+  handlePageChange = (event, newValue) => {
+    if(this.state.isLoggedIn) {
+      this.setState({
+        pageIndex: newValue
+      });
+    }
   }
 
   render() {
@@ -39,48 +87,47 @@ class App extends React.Component {
         }
         {this.state.isLoggedIn &&
           <Router>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/calendar">Calendar</Link>
-                </li>
-                <li>
-                  <Link to="/chat">Chat</Link>
-                </li>
-                <li>
-                  <Link to="/profile">Profile</Link>
-                </li>
-                <li>
-                  <Link to="/shoppingList">Shopping List</Link>
-                </li>
-                <li>
-                  <Link to="/toDo">TODO</Link>
-                </li>
-              </ul>
-            </nav>
+              <AppBar position="static">
+                <Tabs value={this.state.pageIndex} onChange={this.handlePageChange} aria-label="simple tabs example">
+                  <Tab label="Home" {...()=>this.a11yProps(0)} />
+                  <Tab label="Chat" {...()=>this.a11yProps(1)} />
+                  <Tab label="Calendar" {...()=>this.a11yProps(2)} />
+                  <Tab label="TODO" {...()=>this.a11yProps(3)} />
+                  <Tab label="Shopping List" {...()=>this.a11yProps(4)} />
+                </Tabs>
+              </AppBar>
+            <TabPanel value={this.state.pageIndex} index={0}>
+              <Redirect to="/" />
+            </TabPanel>
+            <TabPanel value={this.state.pageIndex} index={1}>
+              <Redirect to="/chat" />
+            </TabPanel>
+            <TabPanel value={this.state.pageIndex} index={2}>
+              <Redirect to="/calendar" />
+            </TabPanel>
+            <TabPanel value={this.state.pageIndex} index={3}>
+              <Redirect to="/toDo" />
+            </TabPanel>
+            <TabPanel value={this.state.pageIndex} index={4}>
+              <Redirect to="/shoppingList" />
+            </TabPanel>
             <Switch>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-            <Route path="/calendar">
-              <CalendarPage />
-            </Route>
-            <Route path="/chat">
-              <ChatPage />
-            </Route>
-            <Route path="/profile">
-              <ProfilePage />
-            </Route>
-            <Route path="/shoppingList">
-              <ShoppingListPage />
-            </Route>
-            <Route path="/toDo">
-              <ToDoPage />
-            </Route>
-          </Switch>
+              <Route exact path="/">
+                <HomePage />
+              </Route>
+              <Route path="/chat">
+                <ChatPage />
+              </Route>
+              <Route path="/calendar">
+                <CalendarPage />
+              </Route>
+              <Route path="/toDo">
+                <ToDoPage />
+              </Route>
+              <Route path="/shoppingList">
+                <ShoppingListPage />
+              </Route>
+            </Switch>
         </Router>
         }
       </div>
