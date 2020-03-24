@@ -100,4 +100,9 @@ export const appointments = [
     startDate: new Date(2018, 6, 28),
     endDate: new Date(2018, 7, 7),
   },
+  {
+    title: 'Presentation',
+    startDate: new Date(2020, 2, 27, 13, 44),
+    endDate: new Date(2020, 2, 27, 13, 55),
+  },
 ];
