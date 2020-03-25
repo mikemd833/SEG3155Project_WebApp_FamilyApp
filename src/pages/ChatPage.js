@@ -31,9 +31,11 @@ const styles = (theme) => ({
     chatButton: {
         padding: theme.spacing(2),
         textAlign: 'center',
-        background: '#2699FB',
+        fontSize: 26,
+        background: '#7FC4FD',
         height: 100,
-        width: 380
+        width: 380,
+        color: 'white'
     },
     gridListItem: {
         padding: theme.spacing(1),
