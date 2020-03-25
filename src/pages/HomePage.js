@@ -2,21 +2,15 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ViewState, EditingState, IntegratedEditing } from '@devexpress/dx-react-scheduler';
 import {
   Scheduler,
   WeekView,
-  MonthView,
   Toolbar,
   DateNavigator,
   Appointments,
   TodayButton,
   AppointmentTooltip,
-  AppointmentForm,
-  ConfirmationDialog
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { appointments } from './demo-data/month-appointments';
 
