@@ -78,10 +78,12 @@ class ShoppingListPage extends React.Component {
                         <Grid container spacing={12}>
                             <Grid item xs={12}>
                                 <Paper className={classes.paperTitle}>Welcome User
+                                <div style={{height:560}}>
                                 <font size="6">
                                     <ul id="list" style={{maxHeight: 510, overflow:"auto"}}>
                                     </ul>
                                 </font>
+                                </div>
                                 </Paper>
                             </Grid>
                         </Grid>
