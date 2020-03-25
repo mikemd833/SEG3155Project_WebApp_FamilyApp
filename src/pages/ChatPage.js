@@ -35,7 +35,10 @@ const styles = (theme) => ({
         background: '#7FC4FD',
         height: 100,
         width: 380,
-        color: 'white'
+        color: 'white',
+        '&:hover': {
+            backgroundColor: "#2699FB",
+        }
     },
     gridListItem: {
         padding: theme.spacing(1),
