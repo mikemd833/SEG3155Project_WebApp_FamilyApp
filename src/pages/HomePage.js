@@ -76,7 +76,7 @@ class HomePage extends React.Component {
                                 <Paper className={classes.paperTitle}>Welcome User</Paper>
                             </Grid>
                             <Grid item xs={12}>
-                                <Paper className={classes.paperRight}>Calendar
+                                <Paper className={classes.paperRight}> 
                                     <Scheduler
                                         data={data}
                                     >
@@ -103,7 +103,18 @@ class HomePage extends React.Component {
                                 <Paper className={classes.paperRight}>To Do</Paper>
                             </Grid>
                             <Grid item xs={12}>
-                                <Paper className={classes.paperRight}>Shopping List</Paper>
+                                <Paper className={classes.paperRight}>Shopping List
+                                <font size="6">
+                                    <ul id="list" style={{maxHeight: 200, overflow:"auto"}}>
+                                        <li>Protein</li>
+                                        <li>Broccoli</li>
+                                        <li>Rice</li>
+                                        <li>Chicken</li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                </font>
+                                </Paper>
                             </Grid>
                         </Grid>
                     </Grid>

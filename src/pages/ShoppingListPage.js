@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import './ShoppingListPage.css';
+import TextField from '@material-ui/core/TextField';
 
 
 const styles = (theme) => ({
@@ -32,6 +32,10 @@ const styles = (theme) => ({
         color: theme.palette.text.secondary,
         height: 300,
     },
+
+    Button:{
+        backgroundColor: "#2699FB"
+    }
   });
 
 
@@ -41,10 +45,11 @@ class ShoppingListPage extends React.Component {
         this.getKList=this.getKList.bind(this);
         this.getMList=this.getMList.bind(this);
         this.getWList=this.getWList.bind(this);
+        this.addList=this.addList.bind(this);
     }
     getKList(){
         var list = document.getElementById("list");
-        list.innerHTML="<li>Protein</li><li>Broccoli</li><li>Rice</li><li>Chicken</li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>"
+        list.innerHTML="<li>Protein</li><li>Broccoli</li><li>Rice</li><li>Chicken</li>"
     }
     getMList(){
         var list = document.getElementById("list");
@@ -53,6 +58,15 @@ class ShoppingListPage extends React.Component {
     getWList(){
         var list = document.getElementById("list");
         list.innerHTML="<li>Paper</li><li>Ink</li><li>Phone Charger</li><li>Valum</li>"
+    }
+    addList(){
+        var txt = document.getElementById("input").value,
+            list= document.getElementById("list"),
+            liNode = document.createElement("LI"),
+            txtNode = document.createTextNode(txt);
+
+        liNode.appendChild(txtNode);
+        list.appendChild(liNode);
     }
     render() {
         const { classes } = this.props;
@@ -77,14 +91,23 @@ class ShoppingListPage extends React.Component {
                     <Grid item xs={8}>
                         <Grid container spacing={12}>
                             <Grid item xs={12}>
-                                <Paper className={classes.paperTitle}>Welcome User
-                                <div style={{height:560}}>
+                                <Paper className={classes.paperTitle}>
+                                    Shopping List
+                                <div style={{height:530}}>
                                 <font size="6">
                                     <ul id="list" style={{maxHeight: 510, overflow:"auto"}}>
                                     </ul>
                                 </font>
                                 </div>
                                 </Paper>
+                                <div>
+                                <TextField id="input" label="Please Type Here" style={{width:"50%", float: "left"}} />
+                                <Button className={classes.Button} style={{width: "50%", float: "right"}} onClick={() => this.addList()}>
+                                    <font size="4">
+                                    Add to Shopping List
+                                    </font>
+                                </Button>
+                                </div>
                             </Grid>
                         </Grid>
                     </Grid>
