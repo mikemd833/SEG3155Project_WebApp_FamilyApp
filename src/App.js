@@ -63,6 +63,11 @@ class App extends React.Component {
     })
   }
 
+  getKList = () =>{
+    var list= document.getElementById("list");
+    list.innerHTML = "<li> Protein </li>";
+}
+
   a11yProps = (index) => {
     return {
       id: `simple-tab-${index}`,

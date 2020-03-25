@@ -66,7 +66,7 @@ export default class CalendarPage extends React.Component {
               }
               return { data };
             });
-      }
+    }
     
       render() {
         const { data, currentViewName } = this.state;
