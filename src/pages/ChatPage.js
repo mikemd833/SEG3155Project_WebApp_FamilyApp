@@ -39,8 +39,8 @@ const styles = (theme) => ({
         textAlign: 'center',
         fontSize: 26,
         background: '#7FC4FD',
-        height: 100,
-        width: 380,
+        height: '10%',
+        width: '90%',
         color: 'white',
         '&:hover': {
             backgroundColor: "#2699FB",
