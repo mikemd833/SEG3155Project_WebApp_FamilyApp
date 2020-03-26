@@ -48,7 +48,7 @@ const styles = (theme) => ({
     },
   });
 
-class ToDoPage extends React.Component {
+class ShoppingListPage extends React.Component {
     constructor(props) {
         super(props);
         this.getKList=this.getKList.bind(this);
@@ -147,4 +147,4 @@ class ToDoPage extends React.Component {
     }
 }
 
-export default withStyles(styles, {withTheme: true})(ToDoPage);
+export default withStyles(styles, {withTheme: true})(ShoppingListPage);
