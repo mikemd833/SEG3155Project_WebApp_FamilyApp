@@ -56,7 +56,8 @@ class ChatPage extends React.Component {
         super(props);
         this.state = {
             chatClient: new StreamChat('4j9h2uxtma94'),
-            userToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiY29sZC1tYXRoLTUifQ.Q4LVm_4R8Hi3xLXtpdSVAFR92C2cwXk9_HxVLW7Lq08'
+            userToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiY29sZC1tYXRoLTUifQ.Q4LVm_4R8Hi3xLXtpdSVAFR92C2cwXk9_HxVLW7Lq08',
+            selectedUser: 'FamilyChat'
         }
 
         // Chat boilerplate
@@ -64,18 +65,28 @@ class ChatPage extends React.Component {
         {
             id: 'cold-math-5',
             name: 'Cold math',
-            image: 'https://getstream.io/random_svg/?id=cold-math-5&name=Cold+math'
+            image: 'https://getstream.io/random_svg'
         },
         this.state.userToken,
         );
+
+        this.handleSelectedUser = this.handleSelectedUser.bind(this);
     }
+
+    // Handle selected user
+    handleSelectedUser = (name) => {
+        this.setState({
+            selectedUser: name
+        })
+    }
+
     render() {
         const { classes } = this.props;
 
-        const channel = this.state.chatClient.channel('messaging', 'godevs', {
+        const channel = this.state.chatClient.channel('messaging', this.state.selectedUser, {
             // add as many custom fields as you'd like
-            image: 'https://cdn.chrisshort.net/testing-certificate-chains-in-go/GOPHER_MIC_DROP.png',
-            name: 'Talk about Go',
+            image: 'https://getstream.io/random_svg',
+            name: this.state.selectedUser,
         });
         return (
             <div>
@@ -87,25 +98,25 @@ class ChatPage extends React.Component {
                             <Paper className={classes.subPaperLeft}>
                                 {/* Each Chat */}
                                     <Grid item xs={12} className={classes.gridListItem}>
-                                        <Button className={classes.chatButton}> Family Chat </Button>
+                                        <Button className={classes.chatButton} onClick={() => this.handleSelectedUser("FamilyChat")}> Family Chat </Button>
                                     </Grid>
                                     <Grid item xs={12} className={classes.gridListItem}>
-                                        <Button className={classes.chatButton}> Karim </Button>
+                                        <Button className={classes.chatButton} onClick={() => this.handleSelectedUser("Karim")}> Karim </Button>
                                     </Grid>
                                     <Grid item xs={12} className={classes.gridListItem}>
-                                        <Button className={classes.chatButton}> Matt </Button>
+                                        <Button className={classes.chatButton} onClick={() => this.handleSelectedUser("Matt")}> Matt </Button>
                                     </Grid>
                                     <Grid item xs={12} className={classes.gridListItem}>
-                                        <Button className={classes.chatButton}> Mike </Button>
+                                        <Button className={classes.chatButton} onClick={() => this.handleSelectedUser("Mike")}> Mike </Button>
                                     </Grid>
                                     <Grid item xs={12} className={classes.gridListItem}>
-                                        <Button className={classes.chatButton}> Miguel </Button>
+                                        <Button className={classes.chatButton} onClick={() => this.handleSelectedUser("Miguel")}> Miguel </Button>
                                     </Grid>
                                     <Grid item xs={12} className={classes.gridListItem}>
-                                        <Button className={classes.chatButton}> Alan </Button>
+                                        <Button className={classes.chatButton} onClick={() => this.handleSelectedUser("Alan")}> Alan </Button>
                                     </Grid>
                                     <Grid item xs={12} className={classes.gridListItem}>
-                                        <Button className={classes.chatButton}> Tanner </Button>
+                                        <Button className={classes.chatButton} onClick={() => this.handleSelectedUser("Tanner")}> Tanner </Button>
                                     </Grid>
                             </Paper>
                         </Paper>
@@ -117,7 +128,7 @@ class ChatPage extends React.Component {
                                 <Chat client={this.state.chatClient} theme={'messaging light'}>
                                     <Channel channel={channel}>
                                     <div className="str-chat__main-panel" style={{ height: '700px' }}>
-                                        <ChannelHeader />
+                                        <ChannelHeader title={this.state.selectedUser}/>
                                         <MessageList />
                                         <MessageInput />
                                     </div>
