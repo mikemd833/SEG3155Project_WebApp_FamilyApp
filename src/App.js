@@ -6,6 +6,7 @@ import CalendarPage from './pages/CalendarPage';
 import ChatPage from './pages/ChatPage';
 import ShoppingListPage from './pages/ShoppingListPage';
 import ToDoPage from './pages/ToDoPage';
+import ProfilePage from './pages/ProfilePage';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -99,6 +100,7 @@ class App extends React.Component {
                         <Tab label="Calendar" {...()=>this.a11yProps(2)} />
                         <Tab label="TODO" {...()=>this.a11yProps(3)} />
                         <Tab label="Shopping List" {...()=>this.a11yProps(4)} />
+                        <Tab label="Profile" {...()=>this.a11yProps(5)} />
                     </Tabs>
                 </AppBar>
                 <Router>
@@ -117,6 +119,9 @@ class App extends React.Component {
                     <TabPanel value={this.state.pageIndex} index={4}>
                         <Redirect to="/shoppingList" />
                     </TabPanel>
+                    <TabPanel value={this.state.pageIndex} index={5}>
+                        <Redirect to="/profile" />
+                    </TabPanel>
                     <Switch>
                         <Route exact path="/">
                             <HomePage />
@@ -132,6 +137,9 @@ class App extends React.Component {
                         </Route>
                         <Route path="/shoppingList">
                             <ShoppingListPage />
+                        </Route>
+                        <Route path="/profile">
+                            <ProfilePage />
                         </Route>
                     </Switch>
                 </Router>
