@@ -1,115 +1,145 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+
+
+// Layout Imports
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import TextField from '@material-ui/core/TextField';
 
-
 const styles = (theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paperTitle: {
+    mainPaperLeft: {
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
+        maxHeight: 730,
     },
-    paperLeft: {
+    subPaperLeft: {
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
-        height: 200,
-        width: 450,
-        backgroundColor: "#2699FB",
+        overflow: 'auto',
+        maxHeight: 660,
     },
-    paperRight: {
+    Button: {
         padding: theme.spacing(2),
         textAlign: 'center',
-        color: theme.palette.text.secondary,
-        height: 300,
+        fontSize: 26,
+        background: '#7FC4FD',
+        height: '10%',
+        width: '90%',
+        color: 'white',
+        '&:hover': {
+            backgroundColor: "#2699FB",
+        }
     },
+    SubButton: {
+        background: '#7FC4FD',
+        '&:hover': {
+            backgroundColor: "#2699FB",
+        }
 
-    Button:{
-        backgroundColor: "#2699FB"
-    }
+    },
+    gridListItem: {
+        padding: theme.spacing(1),
+    },
   });
 
-
-class ShoppingListPage extends React.Component {
-    constructor(props){
+class ToDoPage extends React.Component {
+    constructor(props) {
         super(props);
         this.getKList=this.getKList.bind(this);
         this.getMList=this.getMList.bind(this);
         this.getWList=this.getWList.bind(this);
         this.addList=this.addList.bind(this);
-    }
-    getKList(){
-        var list = document.getElementById("list");
-        list.innerHTML="<li>Protein</li><li>Broccoli</li><li>Rice</li><li>Chicken</li>"
-    }
-    getMList(){
-        var list = document.getElementById("list");
-        list.innerHTML="<li>Burgers</li><li>Fries</li><li>Buns</li><li>Condiments</li>"
-    }
-    getWList(){
-        var list = document.getElementById("list");
-        list.innerHTML="<li>Paper</li><li>Ink</li><li>Phone Charger</li><li>Valum</li>"
-    }
-    addList(){
-        var txt = document.getElementById("input").value,
-            list= document.getElementById("list"),
-            liNode = document.createElement("LI"),
-            txtNode = document.createTextNode(txt);
+        }
+        getKList(){
+            var list = document.getElementById("list");
+            list.innerHTML="<li>Protein</li><li>Broccoli</li><li>Rice</li><li>Chicken</li>"
+        }
+        getMList(){
+            var list = document.getElementById("list");
+            list.innerHTML="<li>Burgers</li><li>Fries</li><li>Buns</li><li>Condiments</li>"
+        }
+        getWList(){
+            var list = document.getElementById("list");
+            list.innerHTML="<li>Paper</li><li>Ink</li><li>Phone Charger</li><li>Valum</li>"
+        }
+        getMiguelList(){
+            var list = document.getElementById("list");
+            list.innerHTML="<li>Veggies</li><li>Cheese</li><li>Peppers</li><li>Mushrooms</li>"
+        }
+        getAList(){
+            var list = document.getElementById("list");
+            list.innerHTML="<li>Cucumbers</li><li>Bread</li>"
+        }
+        getTList(){
+            var list = document.getElementById("list");
+            list.innerHTML="<li>Lettuce</li><li>Chicken</li><li>Mix nuts</li><li>Salsa</li>"
+        }
+        addList(){
+            var txt = document.getElementById("input").value,
+                list= document.getElementById("list"),
+                liNode = document.createElement("LI"),
+                txtNode = document.createTextNode(txt);
+    
+            liNode.appendChild(txtNode);
+            list.appendChild(liNode);
+        }
 
-        liNode.appendChild(txtNode);
-        list.appendChild(liNode);
-    }
+
     render() {
         const { classes } = this.props;
         return (
-            <div className={classes.root}>
+            <div>
                 <Grid container spacing={3}>
-                    {/* Left half side */}
-                    <Grid item xs={4}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12}>
-                                <Button className={classes.paperLeft} id="karim" onClick={() => this.getKList()}>Karim</Button>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Button className={classes.paperLeft} id="mike" onClick={() => this.getMList()}>Mike</Button>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Button className={classes.paperLeft} id = "matt" onClick={() => this.getWList()}>Matt</Button>
-                            </Grid>
-                        </Grid>
+                    {/* Left Side */}
+                    <Grid item xs={3}>
+                        <Paper className={classes.mainPaperLeft}>
+                            <Typography variant="h5" component="h2">Family Members</Typography>
+                            <Paper className={classes.subPaperLeft}>
+                                {/* Each Chat */}
+                                    <Grid item xs={12} className={classes.gridListItem}>
+                                        <Button className={classes.Button} onClick={() => this.getKList()}> Karim </Button>
+                                    </Grid>
+                                    <Grid item xs={12} className={classes.gridListItem}>
+                                        <Button className={classes.Button} onClick={() => this.getWList()}> Matt </Button>
+                                    </Grid>
+                                    <Grid item xs={12} className={classes.gridListItem}>
+                                        <Button className={classes.Button} onClick={() => this.getMList()}> Mike </Button>
+                                    </Grid>
+                                    <Grid item xs={12} className={classes.gridListItem}>
+                                        <Button className={classes.Button} onClick={() => this.getMiguelList()}> Miguel </Button>
+                                    </Grid>
+                                    <Grid item xs={12} className={classes.gridListItem}>
+                                        <Button className={classes.Button} onClick={() => this.getAList()}> Alan </Button>
+                                    </Grid>
+                                    <Grid item xs={12} className={classes.gridListItem}>
+                                        <Button className={classes.Button}onClick={() => this.getTList()}> Tanner </Button>
+                                    </Grid>
+                            </Paper>
+                        </Paper>
                     </Grid>
-                    {/* Right half side */}
-                    <Grid item xs={8}>
-                        <Grid container spacing={12}>
-                            <Grid item xs={12}>
-                                <Paper className={classes.paperTitle}>
-                                    Shopping List
-                                <div style={{height:530}}>
-                                <font size="6">
-                                    <ul id="list" style={{maxHeight: 510, overflow:"auto"}}>
-                                    </ul>
+                    {/* Right Side */}
+                    <Grid item sm={7}>
+                        <Paper style={{padding:20, marginTop:10, marginBottom:10,height:700}}>
+                            <Typography variant="h5" component="h2">To Do List</Typography>
+                                <font size="4">
+                                <ul id="list" style={{overflow:"auto"}}>
+                                </ul>
                                 </font>
-                                </div>
-                                </Paper>
-                                <div>
-                                <TextField id="input" label="Please Type Here" style={{width:"50%", float: "left"}} />
-                                <Button className={classes.Button} style={{width: "50%", float: "right"}} onClick={() => this.addList()}>
-                                    <font size="4">
-                                    Add to Shopping List
-                                    </font>
-                                </Button>
-                                </div>
-                            </Grid>
-                        </Grid>
+                        </Paper>
+                        <div>
+                            <TextField id="input" label="Please Type Here" style={{width:"50%", float: "left"}} />
+                            <Button className={classes.SubButton} style={{width: "50%", float: "right"}} onClick={() => this.addList()}>
+                                <font size="4">
+                                 Add to List
+                                </font>
+                            </Button>
+                        </div>
                     </Grid>
                 </Grid>
             </div>
@@ -117,4 +147,4 @@ class ShoppingListPage extends React.Component {
     }
 }
 
-export default withStyles(styles, { withTheme: true })(ShoppingListPage);
+export default withStyles(styles, {withTheme: true})(ToDoPage);
