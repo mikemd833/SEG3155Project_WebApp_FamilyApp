@@ -51,30 +51,32 @@ const styles = (theme) => ({
     },
   });
 
-// Chat boilerplate
-const chatClient = new StreamChat('4j9h2uxtma94');
-const userToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiY29sZC1tYXRoLTUifQ.Q4LVm_4R8Hi3xLXtpdSVAFR92C2cwXk9_HxVLW7Lq08';
-
-
-chatClient.setUser(
-  {
-       id: 'cold-math-5',
-       name: 'Cold math',
-       image: 'https://getstream.io/random_svg/?id=cold-math-5&name=Cold+math'
-  },
-  userToken,
-);
-
-const channel = chatClient.channel('messaging', 'godevs', {
-    // add as many custom fields as you'd like
-    image: 'https://cdn.chrisshort.net/testing-certificate-chains-in-go/GOPHER_MIC_DROP.png',
-    name: 'Talk about Go',
-  });
-
 class ChatPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            chatClient: new StreamChat('4j9h2uxtma94'),
+            userToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiY29sZC1tYXRoLTUifQ.Q4LVm_4R8Hi3xLXtpdSVAFR92C2cwXk9_HxVLW7Lq08'
+        }
+
+        // Chat boilerplate
+        this.state.chatClient.setUser(
+        {
+            id: 'cold-math-5',
+            name: 'Cold math',
+            image: 'https://getstream.io/random_svg/?id=cold-math-5&name=Cold+math'
+        },
+        this.state.userToken,
+        );
+    }
     render() {
         const { classes } = this.props;
 
+        const channel = this.state.chatClient.channel('messaging', 'godevs', {
+            // add as many custom fields as you'd like
+            image: 'https://cdn.chrisshort.net/testing-certificate-chains-in-go/GOPHER_MIC_DROP.png',
+            name: 'Talk about Go',
+        });
         return (
             <div>
                 <Grid container spacing={3}>
@@ -112,7 +114,7 @@ class ChatPage extends React.Component {
                     <Grid item xs={9}>
                         <Paper className={classes.paperRight}>
                             <div className="str-chat" style={{ height: 'unset' }}>
-                                <Chat client={chatClient} theme={'messaging light'}>
+                                <Chat client={this.state.chatClient} theme={'messaging light'}>
                                     <Channel channel={channel}>
                                     <div className="str-chat__main-panel" style={{ height: '700px' }}>
                                         <ChannelHeader />
