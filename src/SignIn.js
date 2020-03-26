@@ -24,7 +24,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
         <Router>
-            <Link color="inherit" href="https://material-ui.com/">
+            <Link to="/" color="inherit" href="https://material-ui.com/">
                 Your Website
             </Link>{' '}
         </Router>
@@ -36,10 +36,6 @@ function Copyright() {
 
 function SignInPage(props) {
 
-    function handleLoginButton() {
-        props.handleLogin();
-      }
-
     return (
         <div className={props.classes.paper}>
         <Avatar className={props.classes.avatar}>
@@ -48,40 +44,79 @@ function SignInPage(props) {
         <Typography component="h1" variant="h5">
             Sign in
         </Typography>
-            <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            />
-            <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            />
+            {/* Initial State of Email */}
+            {props.isEmailFilled &&
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                />
+            }
+            {/* If Email is not filled */}
+            {!props.isEmailFilled &&
+                <TextField
+                    error
+                    helperText="Please enter your email."
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                />
+            }
+            {/* Initial State of Password */}
+            {props.isPasswordFilled &&
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                />
+            }
+            {/* Password is not filled*/}
+            {!props.isPasswordFilled &&
+                <TextField
+                    error
+                    helperText="Please enter your password."
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                />
+            }
+            
             <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
             />
             <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={props.classes.submit}
-            onClick={() => handleLoginButton()}
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={props.classes.submit}
+                onClick={() => props.handleLogin(document.getElementById('email').value, document.getElementById('password').value)}
             >
-            Sign In
+                Sign In
             </Button>
         </div>
     );
@@ -113,9 +148,18 @@ class SignIn extends React.Component {
         this.state= ({
             isSigningIn: true,
             isSigningUp: false,
-            isForgetPassword: false
+            isForgetPassword: false,
+            isPasswordFilled: "Initial",
+            isEmailFilled: "Initial"
         });
 
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        //If all correct, redirect to home page.
+        if(this.state.isEmailFilled === true && this.state.isPasswordFilled === true) {
+            this.props.onClickLogin()
+        }
     }
 
     handleSignUpLink = () => {
@@ -134,6 +178,29 @@ class SignIn extends React.Component {
         });
     }
 
+    handleValidation = (email, password) => {
+        // Check Email
+        if(email.trim() === "") {
+            this.setState({
+                isEmailFilled: false
+            })
+        } else {
+            this.setState({
+                isEmailFilled: true
+            })
+        }
+        // Check Password
+        if(password.trim() === ""){
+            this.setState({
+                isPasswordFilled: false
+            });
+        } else {
+            this.setState({
+                isPasswordFilled: true
+            })
+        }
+    }
+
     render() {
         const { classes } = this.props;
 
@@ -143,7 +210,12 @@ class SignIn extends React.Component {
                 <Router>
                     <Switch>
                         <Route exact path ="/">
-                            <SignInPage classes={classes} handleLogin={()=>this.props.onClickLogin()} />
+                            <SignInPage
+                                classes={classes} 
+                                handleLogin={this.handleValidation} 
+                                isEmailFilled={this.state.isEmailFilled}
+                                isPasswordFilled={this.state.isPasswordFilled}
+                            />
                         </Route>
                         <Route path="/signUp">
                             <SignUpPage />
@@ -162,6 +234,15 @@ class SignIn extends React.Component {
                                     Don't have an account? Sign Up
                                 </Link>
                             </Grid>
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                                onClick={() => this.props.onClickLogin()}
+                            >
+                                / Developer
+                            </Button>
                         </Grid>
                     }
                     {/*The Links to display on the signing up page*/}
