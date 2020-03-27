@@ -70,7 +70,7 @@ class ToDoPage extends React.Component {
         }
         getMiguelList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Clean the living room</li><li>Renew bus pass</li><li>Peppers</li><li>Mushrooms</li>"
+            list.innerHTML="<li>Clean the living room</li><li>Renew bus pass</li><li>Submit report</li>"
         }
         getAList(){
             var list = document.getElementById("list");

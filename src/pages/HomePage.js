@@ -155,7 +155,15 @@ class HomePage extends React.Component {
                                 </Paper>
                             </Grid>
                             <Grid item xs={12}>
-                                <Paper className={classes.paperRight}>To Do</Paper>
+                                <Paper className={classes.paperRight}>To Do
+                                <font size="6">
+                                    <ul id="list" style={{maxHeight: 200, overflow:"auto"}}>
+                                    <li>Take out the garbage</li>
+                                    <li>Clean the kitchen</li>
+                                    <li>Finish database A2</li>
+                                    </ul>
+                                </font>
+                                </Paper>
                             </Grid>
                             <Grid item xs={12}>
                                 <Paper className={classes.paperRight}>Shopping List
@@ -165,8 +173,7 @@ class HomePage extends React.Component {
                                         <li>Broccoli</li>
                                         <li>Rice</li>
                                         <li>Chicken</li>
-                                        <li></li>
-                                        <li></li>
+                                        <li>Pasta</li>
                                     </ul>
                                 </font>
                                 </Paper>
