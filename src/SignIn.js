@@ -222,7 +222,7 @@ class SignIn extends React.Component {
                             />
                         </Route>
                         <Route path="/signUp">
-                            <SignUpPage />
+                            <SignUpPage handleSuccessLogin={()=>this.props.onHandleSignUp()}/>
                         </Route>
                     </Switch>
                     {/*The Links to display on the signing in page*/}

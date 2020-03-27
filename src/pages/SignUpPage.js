@@ -9,6 +9,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+// Firebase Imports
+import * as firebase from "firebase/app";
+require("firebase/auth");
 
 const styles = (theme) => ({
   paper: {
@@ -36,8 +41,17 @@ const styles = (theme) => ({
         backgroundColor: "#2699FB",
     }
   },
+  snackBar: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
 });
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
 class SignUp extends React.Component {
     constructor(props){
         super(props);
@@ -48,9 +62,51 @@ class SignUp extends React.Component {
             isPasswordFilled: "Initial",
             isPasswordMatch: "Initial",
             passwordErrorMsg: "",
-            emailErrorMsg:""
+            emailErrorMsg:"",
+            error: false,
+            email:"",
+            password:"",
+            snackbarSetOpenFailure: false,
         });
     }
+
+    componentDidUpdate(prevStates, prevProps) {
+        if(this.state.isFirstNameFilled === true && this.state.isEmailFilled === true &&
+            this.state.isEmailCorrectFormat === true && this.state.isPasswordFilled === true && this.state.isPasswordMatch === true) {
+            firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
+            this.setState({
+                isFirstNameFilled: "Initial",
+                isEmailFilled: "Initial",
+                isEmailCorrectFormat: "Initial",
+                isPasswordFilled: "Initial",
+                isPasswordMatch: "Initial",
+                passwordErrorMsg: "",
+                emailErrorMsg:"",
+                email:"",
+                password:"",
+                snackbarSetOpenSuccess: true,
+            });
+            this.props.handleSuccessLogin()
+        } else if(this.state.error === true){
+            this.setState({
+                error: false,
+                snackbarSetOpenFailure: true,
+            })
+        }
+    }
+
+    handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        this.setState({
+            snackbarSetOpenFailure: false,
+        })
+    };
 
     validationHandler(fname, email, password1, password2) {
         // fname validation
@@ -60,7 +116,8 @@ class SignUp extends React.Component {
             });
         } else {
             this.setState({
-                isFirstNameFilled: false
+                isFirstNameFilled: false,
+                error: true,
             });
         }
         // email validation filled step 1
@@ -72,19 +129,23 @@ class SignUp extends React.Component {
             this.setState({
                 emailErrorMsg: "Please enter your email.",
                 isEmailFilled: false,
-                isEmailCorrectFormat: false
+                isEmailCorrectFormat: false,
+                error: true,
+                
             });
         }
         // email validation format step 2
         if(email.trim() !== "" && this.validateEmail(email)) {
             this.setState({
-                isEmailCorrectFormat: true
+                isEmailCorrectFormat: true,
+                email: email
             });
         } else if (email.trim() !== "") {
             this.setState({
                 emailErrorMsg: "The email was not in correct format. email@domain.com",
                 isEmailFilled: false,
-                isEmailCorrectFormat: false
+                isEmailCorrectFormat: false,
+                error: true,
             });
         } else {
             this.setState({
@@ -100,19 +161,22 @@ class SignUp extends React.Component {
             this.setState({
                 passwordErrorMsg: "Please enter a password.",
                 isPasswordFilled: false,
-                isPasswordMatch: false
+                isPasswordMatch: false,
+                error: true,
             });
         }
         // passwords validation match step 2
         if(password1.trim() !== "" && password1 === password2) {
             this.setState({
-                isPasswordMatch: true
+                isPasswordMatch: true,
+                password: password1
             });
         } else if(password1.trim() !== "") {
             this.setState({
                 passwordErrorMsg: "The passwords did not match.",
                 isPasswordMatch: false,
-                isPasswordFilled: false
+                isPasswordFilled: false,
+                error: true,
             });
         }
     }
@@ -313,6 +377,13 @@ class SignUp extends React.Component {
                 >
                     Sign Up
                 </Button>
+            </div>
+            <div className={classes.snackBar} >
+                <Snackbar open={this.state.snackbarSetOpenFailure} autoHideDuration={6000} onClose={this.handleClose}>
+                    <Alert onClose={this.handleClose} severity="error">
+                        Oops, something went wrong!
+                    </Alert>
+                </Snackbar>
             </div>
         </Container>
         );
