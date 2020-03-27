@@ -124,7 +124,11 @@ class HomePage extends React.Component {
                     <Grid item xs={5}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
-                                <Paper className={classes.paperTitle}>Welcome SEG User</Paper>
+                                <Paper className={classes.paperTitle}>
+                                    <Typography gutterBottom variant="h5" component="h2">
+                                        Welcome Karim
+                                    </Typography>
+                                </Paper>
                             </Grid>
                             <Grid item xs={12}>
                                 <Paper className={classes.paperRight}> 
