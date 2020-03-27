@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import BackspaceIcon from '@material-ui/icons/Backspace';
 
 
 
@@ -59,30 +60,31 @@ class ShoppingListPage extends React.Component {
         }
         getKList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Protein</li><li>Broccoli</li><li>Rice</li><li>Chicken</li><li>Pasta</li>"
+            list.innerHTML="<li>Protein<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Broccoli<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Rice<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Chicken<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Pasta<Button><BackspaceIcon></BackspaceIcon></Button></li>"
         }
         getMList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Burgers</li><li>Fries</li><li>Buns</li><li>Condiments</li>"
+            list.innerHTML="<li>Burgers<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Fries<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Buns<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Condiments<Button><BackspaceIcon></BackspaceIcon></Button></li>"
         }
         getWList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Paper</li><li>Ink</li><li>Phone Charger</li><li>Valum</li>"
+            list.innerHTML="<li>Paper<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Ink</li><li>Phone Charger<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Valum<Button><BackspaceIcon></BackspaceIcon></Button></li>"
         }
         getMiguelList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Veggies</li><li>Cheese</li><li>Peppers</li><li>Mushrooms</li>"
+            list.innerHTML="<li>Veggies<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Cheese<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Peppers<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Mushrooms<Button><BackspaceIcon></BackspaceIcon></Button></li>"
         }
         getAList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Cucumbers</li><li>Bread</li>"
+            list.innerHTML="<li>Cucumbers<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Bread<Button><BackspaceIcon></BackspaceIcon></Button></li>"
         }
         getTList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Lettuce</li><li>Chicken</li><li>Mix nuts</li><li>Salsa</li>"
+            list.innerHTML="<li>Lettuce<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Chicken<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Mix nuts<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Salsa<Button><BackspaceIcon></BackspaceIcon></Button></li>"
         }
         addList(){
             var txt = document.getElementById("input").value,
+            txt = txt + "<Button><BackspaceIcon></BackspaceIcon></Button>",
                 list= document.getElementById("list"),
                 liNode = document.createElement("LI"),
                 txtNode = document.createTextNode(txt);
@@ -130,7 +132,11 @@ class ShoppingListPage extends React.Component {
                             <Typography variant="h5" component="h2">Shopping List</Typography>
                                 <font size="4">
                                 <ul id="list" style={{overflow:"auto"}}>
-                                <li>Protein</li><li>Broccoli</li><li>Rice</li><li>Chicken</li><li>Pasta</li>
+                                <li>Protein<Button><BackspaceIcon></BackspaceIcon></Button></li>
+                                <li>Broccoli<Button><BackspaceIcon></BackspaceIcon></Button></li>
+                                <li>Rice<Button><BackspaceIcon></BackspaceIcon></Button></li>
+                                <li>Chicken<Button><BackspaceIcon></BackspaceIcon></Button></li>
+                                <li>Pasta<Button><BackspaceIcon></BackspaceIcon></Button></li>
                                 </ul>
                                 </font>
                         </Paper>

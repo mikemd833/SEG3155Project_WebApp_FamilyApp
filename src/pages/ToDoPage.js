@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import BackspaceIcon from '@material-ui/icons/Backspace';
 
 
 // Layout Imports
@@ -59,26 +59,26 @@ class ToDoPage extends React.Component {
         }
         getKList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Take out the garbage</li><li>Clean the kitchen</li><li>Finish database A2</li>"}
+            list.innerHTML="<li>Take out the garbage<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Clean the kitchen<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Finish database A2<Button><BackspaceIcon></BackspaceIcon></Button></li>"}
         getMList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Clean living room</li><li>Shovel the snow</li><li>Complete lab report</li><li>feed the cat</li>"
+            list.innerHTML="<li>Clean living room<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Shovel the snow<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Complete lab report<Button><BackspaceIcon></BackspaceIcon></Button></li><li>feed the cat<Button><BackspaceIcon></BackspaceIcon></Button></li>"
         }
         getWList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Take the dog to the vet</li><li>Grocery shopping</li><li>Study for SEG final</li>"
+            list.innerHTML="<li>Take the dog to the vet<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Grocery shopping<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Study for SEG final<Button><BackspaceIcon></BackspaceIcon></Button></li>"
         }
         getMiguelList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Clean the living room</li><li>Renew bus pass</li><li>Submit report</li>"
+            list.innerHTML="<li>Clean the living room<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Renew bus pass<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Submit report<Button><BackspaceIcon></BackspaceIcon></Button></li>"
         }
         getAList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Walk the dog</li><li>Clean the car</li>"
+            list.innerHTML="<li>Walk the dog<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Clean the car<Button><BackspaceIcon></BackspaceIcon></Button></li>"
         }
         getTList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Vaccum the house</li><li>Take the dog for a walk</li>"
+            list.innerHTML="<li>Vaccum the house<Button><BackspaceIcon></BackspaceIcon></Button></li><li>Take the dog for a walk<Button><BackspaceIcon></BackspaceIcon></Button></li>"
         }
         addList(){
             var txt = document.getElementById("input").value,
@@ -129,7 +129,9 @@ class ToDoPage extends React.Component {
                             <Typography variant="h5" component="h2">To Do List</Typography>
                                 <font size="4">
                                 <ul id="list" style={{overflow:"auto"}}>
-                                <li>Take out the garbage</li><li>Clean the kitchen</li><li>Finish database A2</li>
+                                <li>Take out the garbage<Button><BackspaceIcon></BackspaceIcon></Button></li>
+                                <li>Clean the kitchen<Button><BackspaceIcon></BackspaceIcon></Button></li>
+                                <li>Finish database A2<Button><BackspaceIcon></BackspaceIcon></Button></li>
                                 </ul>
                                 </font>
                         </Paper>
