@@ -68,8 +68,8 @@ class ProfilePage extends React.Component {
         super(props);
         this.changeProfile=this.changeProfile.bind(this);
         this.state = ({
-            selectedDate: new Date('1969-04-20T21:11:54'),
-            setSelectedDate: new Date('1969-04-20T21:11:54')
+            selectedDate: new Date('1999-05-29T21:11:54'),
+            setSelectedDate: new Date('1999-05-29T21:11:54')
         });
     }
 
@@ -124,11 +124,11 @@ class ProfilePage extends React.Component {
 			        		                </tr>
 			        		                <tr>
 			            		                <td>Address:	</td>
-			            		                <td><TextField id="Address" label="Awesome St" /> </td>
+			            		                <td><TextField id="Address" label="Ottawa, On" /> </td>
 			        		                </tr>
 			        		                <tr>
 			            		                <td>Email:	</td>
-			            		                <td><TextField id="Email" label="awesome@awesome.com" /> </td>
+			            		                <td><TextField id="Email" label="karim@gmail.com" /> </td>
 			        		                </tr>
 			        		                <tr>
 			            		                <td>Birthday:	</td>
