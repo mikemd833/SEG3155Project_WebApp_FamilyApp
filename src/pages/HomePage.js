@@ -34,11 +34,11 @@ const styles = (theme) => ({
         color: theme.palette.text.secondary,
     },
     paperLeft: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
         textAlign: 'center',
         color: theme.palette.text.secondary,
         height: 500,
-        overflow: "auto"
+        overflow: "auto hidden"
     },
     paperRight: {
         padding: theme.spacing(2),
@@ -77,7 +77,6 @@ class HomePage extends React.Component {
         const { data, currentViewName } = this.state;
         const channel = this.state.chatClient.channel('messaging', this.state.selectedUser, {
             // add as many custom fields as you'd like
-            image: 'https://getstream.io/random_svg',
             name: this.state.selectedUser,
         });
         return (
@@ -88,6 +87,9 @@ class HomePage extends React.Component {
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
                                 <Paper className={classes.paperLeft}>
+                                    <Typography gutterBottom variant="h5" component="h2">
+                                        The SEG Family
+                                    </Typography>
                                     <CardActionArea>
                                         <CardMedia
                                             className={classes.media}
@@ -95,28 +97,24 @@ class HomePage extends React.Component {
                                             title="Family Picture"
                                         />
                                         <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            The SEG Family
-                                        </Typography>
                                         </CardContent>
                                     </CardActionArea>
                                 </Paper>
                             </Grid>
                             <Grid item xs={12}>
                                 <Paper className={classes.paperLeft}>
-                                    <div className="str-chat" style={{ height: '100px' }}>
-                                        <Chat client={this.state.chatClient}>
-                                            <Channel channel={channel}>
-                                                <div className="str-chat__main-panel" style={{ height: '400px' }}>
-                                                    <MessageList />
-                                                    <MessageInput />
-                                                </div>
-                                            <Thread />
-                                            </Channel>
-                                        </Chat>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            The Family Chat
-                                        </Typography>
+                                    <div className="str-chat" style={{ height: '200px' }}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                The Family Chat
+                                            </Typography>
+                                            <Chat client={this.state.chatClient}>
+                                                <Channel channel={channel}>
+                                                    <div className="str-chat__main-panel" style={{ height: '450px' }}>
+                                                        <MessageList />
+                                                        <MessageInput />
+                                                    </div>
+                                                </Channel>
+                                            </Chat>
                                     </div>
                                 </Paper>
                             </Grid>
