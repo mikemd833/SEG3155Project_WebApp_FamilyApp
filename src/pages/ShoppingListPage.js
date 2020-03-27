@@ -84,7 +84,6 @@ class ShoppingListPage extends React.Component {
         }
         addList(){
             var txt = document.getElementById("input").value,
-            txt = "<Button><BackspaceIcon>"+{txt}+"</BackspaceIcon></Button>",
                 list= document.getElementById("list"),
                 liNode = document.createElement("LI"),
                 txtNode = document.createTextNode(txt);
