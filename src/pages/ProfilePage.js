@@ -2,22 +2,18 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import { ViewState } from '@devexpress/dx-react-scheduler';
-import {
-  Scheduler,
-  WeekView,
-  Toolbar,
-  DateNavigator,
-  Appointments,
-  TodayButton,
-  AppointmentTooltip,
-} from '@devexpress/dx-react-scheduler-material-ui';
-import { appointments } from './demo-data/month-appointments';
 //Imports related to Cards Material UI
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
 
 const styles = (theme) => ({
     root: {
@@ -36,7 +32,7 @@ const styles = (theme) => ({
     },
     paperRight: {
         padding: theme.spacing(2),
-        textAlign: 'center',
+        textAlign: 'left',
         color: theme.palette.text.secondary,
         height: 300,
     },
@@ -45,22 +41,24 @@ const styles = (theme) => ({
       },
     });
 
+
 class ProfilePage extends React.Component {
     constructor(props) {
-        super(props);
-        this.state = {
-          data: appointments,
-          currentViewName: 'Week',
-        };
+        super(props)    
+        
+        const handleDateChange = date => {
+            setSelectedDate(date);
+          };
     }
     render() {
         const { classes } = this.props;
-        const { data, currentViewName } = this.state;
+        const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
         return (
             <div className={classes.root}>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container spacing={3}>
                     {/* Left half side */}
-                    <Grid item xs={7}>
+                    <Grid item xs={4}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
                                 <Paper className={classes.paperLeft}>
@@ -81,55 +79,54 @@ class ProfilePage extends React.Component {
                         </Grid>
                     </Grid>
                     {/* Right half side */}
-                    <Grid item xs={5}>
+                    <Grid item xs={8}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
-                                <Paper className={classes.paperTitle}>Welcome SEG User</Paper>
-                            </Grid>
-                            <Grid item xs={12}>
                                 <Paper className={classes.paperRight}> 
-                                    <Scheduler
-                                        data={data}
-                                    >
-                                        <ViewState
-                                            defaultCurrentDate={"2020-03-27"}
-                                            currentViewName={currentViewName}
-                                        />
-                                        <WeekView
-                                        startDayHour={6}
-                                        endDayHour={22}
-                                        />
-                                        <Toolbar />
-                                        <DateNavigator />
-                                        <TodayButton />
-                                        <Appointments />
-                                        <AppointmentTooltip
-                                            showCloseButton
-                                            showOpenButton
-                                        />
-                                    </Scheduler>
-                                </Paper>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Paper className={classes.paperRight}>To Do</Paper>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Paper className={classes.paperRight}>Shopping List
-                                <font size="6">
-                                    <ul id="list" style={{maxHeight: 200, overflow:"auto"}}>
-                                        <li>Protein</li>
-                                        <li>Broccoli</li>
-                                        <li>Rice</li>
-                                        <li>Chicken</li>
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                </font>
+                                <form>
+					                <table>
+			   			                <tbody>
+                                               <font size="6">
+			    	    	                <tr>
+			            		                <td>Name:	</td>
+                                                <KeyboardDatePicker
+                                                    disableToolbar
+                                                    variant="inline"
+                                                    format="MM/dd/yyyy"
+                                                    margin="normal"
+                                                    id="date-picker-inline"
+                                                    label="Date picker inline"
+                                                    value={selectedDate}
+                                                    onChange={handleDateChange}
+                                                    KeyboardButtonProps={{
+                                                    'aria-label': 'change date',
+                                                    }}
+                                                />
+                                                <td><input type="input" name="name" value="Karim Karoui"></input> </td>
+			        		                </tr>
+			        		                <tr>
+			            		                <td>Address:	</td>
+			            		                <td><input type="input" name="address" value="Awesome Street"></input> </td>
+			        		                </tr>
+			        		                <tr>
+			            		                <td>Email:	</td>
+			            		                <td><input type="input" name="email" value="awesome@awesome.com"></input> </td>
+			        		                </tr>
+			        		                <tr>
+			            		                <td>Birthday:	</td>
+			            		                <td><input type="date" name="camera" value="1969-04-20"></input> </td>
+			        		                </tr>
+                                            </font>
+			    		                </tbody>
+					                </table>
+					                <input class="submit" type="submit" value="Save Changes"></input> 
+				                </form>
                                 </Paper>
                             </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
+                </MuiPickersUtilsProvider>
             </div>
         );
     }
