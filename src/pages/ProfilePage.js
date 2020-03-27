@@ -8,6 +8,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import DateFnsUtils from '@date-io/date-fns';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -34,11 +36,30 @@ const styles = (theme) => ({
         padding: theme.spacing(2),
         textAlign: 'left',
         color: theme.palette.text.secondary,
-        height: 300,
+        height: 500,
     },
     media: {
         height: 400,
       },
+      Button: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        fontSize: 26,
+        background: '#7FC4FD',
+        height: '10%',
+        width: '90%',
+        color: 'white',
+        '&:hover': {
+            backgroundColor: "#2699FB",
+        }
+    },
+    SubButton: {
+        background: '#7FC4FD',
+        '&:hover': {
+            backgroundColor: "#2699FB",
+        }
+
+    },
     });
 
 
@@ -46,8 +67,8 @@ class ProfilePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = ({
-            selectedDate: new Date('2014-08-18T21:11:54'),
-            setSelectedDate: new Date('2014-08-18T21:11:54')
+            selectedDate: new Date('1969-04-20T21:11:54'),
+            setSelectedDate: new Date('1969-04-20T21:11:54')
         });
     }
 
@@ -94,37 +115,52 @@ class ProfilePage extends React.Component {
                                                <font size="6">
 			    	    	                <tr>
 			            		                <td>Name:	</td>
+                                                <td><TextField id="Name" value="Karim Karoui" /> </td>
+			        		                </tr>
+			        		                <tr>
+			            		                <td>Address:	</td>
+			            		                <td><TextField id="Address" value="Awesome St" /> </td>
+			        		                </tr>
+			        		                <tr>
+			            		                <td>Email:	</td>
+			            		                <td><TextField id="Email" value="awesome@awesome.com" /> </td>
+			        		                </tr>
+			        		                <tr>
+			            		                <td>Birthday:	</td>
+                                                <td>
                                                 <KeyboardDatePicker
                                                     disableToolbar
                                                     variant="inline"
                                                     format="MM/dd/yyyy"
                                                     margin="normal"
                                                     id="date-picker-inline"
-                                                    label="Date picker inline"
                                                     value={this.state.selectedDate}
                                                     onChange={this.state.handleDateChange}
                                                     KeyboardButtonProps={{
                                                     'aria-label': 'change date',
                                                     }}
                                                 />
-                                                <td><input type="input" name="name" value="Karim Karoui"></input> </td>
+
+                                                </td>
 			        		                </tr>
-			        		                <tr>
-			            		                <td>Address:	</td>
-			            		                <td><input type="input" name="address" value="Awesome Street"></input> </td>
-			        		                </tr>
-			        		                <tr>
-			            		                <td>Email:	</td>
-			            		                <td><input type="input" name="email" value="awesome@awesome.com"></input> </td>
-			        		                </tr>
-			        		                <tr>
-			            		                <td>Birthday:	</td>
-			            		                <td><input type="date" name="camera" value="1969-04-20"></input> </td>
-			        		                </tr>
+                                            <tr>
+                                                <td>Change Passsword:	</td>
+                                                <td>
+                                                <TextField
+                                                    id="standard-password-input"
+                                                    label="Password"
+                                                    type="password"
+                                                    autoComplete="current-password"/>
+                                                </td>
+                                            </tr>
                                             </font>
 			    		                </tbody>
 					                </table>
-					                <input class="submit" type="submit" value="Save Changes"></input> 
+					                    <Button type="submit" className={classes.SubButton} style={{width: "50%", float: "left"}}>
+                                            <font size="4">
+                                                Save Changes
+                                            </font>
+                                        </Button>
 				                </form>
                                 </Paper>
                             </Grid>
