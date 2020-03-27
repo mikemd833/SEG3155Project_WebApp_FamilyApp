@@ -126,7 +126,7 @@ class ShoppingListPage extends React.Component {
                     {/* Right Side */}
                     <Grid item sm={7}>
                         <Paper style={{padding:20, marginTop:10, marginBottom:10,height:700}}>
-                            <Typography variant="h5" component="h2">To Do List</Typography>
+                            <Typography variant="h5" component="h2">Shopping List</Typography>
                                 <font size="4">
                                 <ul id="list" style={{overflow:"auto"}}>
                                 </ul>
