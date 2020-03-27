@@ -196,5 +196,4 @@ class HomePage extends React.Component {
         );
     }
 }
-
 export default withStyles(styles, { withTheme: true })(HomePage);
