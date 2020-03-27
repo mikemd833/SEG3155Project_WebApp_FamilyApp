@@ -2,17 +2,17 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
+import { ViewState } from '@devexpress/dx-react-scheduler';
 import {
   Scheduler,
   WeekView,
-  Appointments,
-  AppointmentTooltip,
-  AppointmentForm,
   Toolbar,
   DateNavigator,
+  Appointments,
+  TodayButton,
+  AppointmentTooltip,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { appointments } from './demo-data/month-appointments';
-import { ViewState, EditingState, IntegratedEditing } from '@devexpress/dx-react-scheduler';
 //Imports related to Cards Material UI
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -40,24 +40,11 @@ const styles = (theme) => ({
         height: 500,
         overflow: "auto hidden"
     },
-    paperLeftBottom: {
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-        height: 700,
-    },
     paperRight: {
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
         height: 300,
-    },
-    paperRightBottom: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-        height: 480,
-        overflow: "auto hidden"
     },
     media: {
         height: 400,
@@ -94,7 +81,7 @@ class HomePage extends React.Component {
         });
         return (
             <div className={classes.root}>
-                <Grid container spacing={2}>
+                <Grid container spacing={3}>
                     {/* Left half side */}
                     <Grid item xs={7}>
                         <Grid container spacing={3}>
@@ -115,27 +102,20 @@ class HomePage extends React.Component {
                                 </Paper>
                             </Grid>
                             <Grid item xs={12}>
-                                <Paper className={classes.paperLeftBottom}>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        Calendar
-                                    </Typography> 
-                                    <Scheduler data={data} height={"640"}>
-                                        <ViewState
-                                            defaultCurrentDate={"2020-03-27"}
-                                            currentViewName={currentViewName}
-                                        />
-                                        <WeekView
-                                            startDayHour={6}
-                                            endDayHour={22}
-                                        />
-                                        <Toolbar />
-                                        <DateNavigator />
-                                        <Appointments />
-                                        <AppointmentTooltip
-                                            showCloseButton
-                                            showOpenButton
-                                        />
-                                    </Scheduler>
+                                <Paper className={classes.paperLeft}>
+                                    <div className="str-chat" style={{ height: '200px' }}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                The Family Chat
+                                            </Typography>
+                                            <Chat client={this.state.chatClient}>
+                                                <Channel channel={channel}>
+                                                    <div className="str-chat__main-panel" style={{ height: '450px' }}>
+                                                        <MessageList />
+                                                        <MessageInput />
+                                                    </div>
+                                                </Channel>
+                                            </Chat>
+                                    </div>
                                 </Paper>
                             </Grid>
                         </Grid>
@@ -151,43 +131,52 @@ class HomePage extends React.Component {
                                 </Paper>
                             </Grid>
                             <Grid item xs={12}>
-                                <Paper className={classes.paperRight}>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        Shopping List
-                                    </Typography>
-                                    <font size="6">
-                                        <ul id="list" style={{maxHeight: 200, overflow:"auto"}}>
-                                            <li>Protein</li>
-                                            <li>Broccoli</li>
-                                            <li>Rice</li>
-                                            <li>Chicken</li>
-                                        </ul>
-                                    </font>
+                                <Paper className={classes.paperRight}> 
+                                    <Scheduler
+                                        data={data}
+                                    >
+                                        <ViewState
+                                            defaultCurrentDate={"2020-03-27"}
+                                            currentViewName={currentViewName}
+                                        />
+                                        <WeekView
+                                        startDayHour={6}
+                                        endDayHour={22}
+                                        />
+                                        <Toolbar />
+                                        <DateNavigator />
+                                        <TodayButton />
+                                        <Appointments />
+                                        <AppointmentTooltip
+                                            showCloseButton
+                                            showOpenButton
+                                        />
+                                    </Scheduler>
                                 </Paper>
                             </Grid>
                             <Grid item xs={12}>
-                                <Paper className={classes.paperRight}>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        To Do
-                                    </Typography>
+                                <Paper className={classes.paperRight}>To Do
+                                <font size="6">
+                                    <ul id="list" style={{maxHeight: 200, overflow:"auto"}}>
+                                    <li>Take out the garbage</li>
+                                    <li>Clean the kitchen</li>
+                                    <li>Finish database A2</li>
+                                    </ul>
+                                </font> 
                                 </Paper>
                             </Grid>
                             <Grid item xs={12}>
-                                <Paper className={classes.paperRightBottom}>
-                                        <div className="str-chat" style={{ height: '200px' }}>
-                                            <Typography gutterBottom variant="h5" component="h2">
-                                                The Family Chat
-                                            </Typography>
-                                            <Chat client={this.state.chatClient}>
-                                                <Channel channel={channel}>
-                                                    <div className="str-chat__main-panel" style={{ height: '425px' }}>
-                                                        <MessageList />
-                                                        <MessageInput />
-                                                    </div>
-                                                </Channel>
-                                            </Chat>
-                                        </div>
-                                    </Paper>
+                                <Paper className={classes.paperRight}>Shopping List
+                                <font size="6">
+                                    <ul id="list" style={{maxHeight: 200, overflow:"auto"}}>
+                                        <li>Protein</li>
+                                        <li>Broccoli</li>
+                                        <li>Rice</li>
+                                        <li>Chicken</li>
+                                        <li>Pasta</li>
+                                    </ul>
+                                </font>
+                                </Paper>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -196,4 +185,5 @@ class HomePage extends React.Component {
         );
     }
 }
+
 export default withStyles(styles, { withTheme: true })(HomePage);
