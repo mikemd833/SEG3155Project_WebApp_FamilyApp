@@ -20,6 +20,12 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+//Firebase Imports
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,23 +52,57 @@ const styles = (theme) => ({
   }
 });
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoggedIn: false,
-      pageIndex: 0
+      pageIndex: 0,
+      firebaseConfig: {
+        apiKey: "AIzaSyDqkDV0R99I6lB88VZUD4zSw_WbZ7yKryw",
+        authDomain: "seg3125a-familyapp.firebaseapp.com",
+        databaseURL: "https://seg3125a-familyapp.firebaseio.com",
+        projectId: "seg3125a-familyapp",
+        storageBucket: "seg3125a-familyapp.appspot.com",
+        messagingSenderId: "331254437561",
+        appId: "1:331254437561:web:90f56df6689fe8eca0ed68",
+        measurementId: "G-MER7B25WLJ"
+      },
+      snackbarSuccessSignUp: false,
     }
-
+    if(!firebase.apps.length) {
+      firebase.initializeApp(this.state.firebaseConfig);
+    }
     this.handleLogin = this.handleLogin.bind(this);
     this.a11yProps = this.a11yProps(this);
   }
 
-  handleLogin = () => {
-    this.setState({
-      isLoggedIn: true
-    })
-  }
+    handleSuccessLogin = () =>{
+        this.setState({
+            isLoggedIn: true,
+            snackbarSuccessSignUp: true,
+        })
+    }
+
+    snackBarHandleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        this.setState({
+            snackbarSuccessSignUp: false,
+        })
+    };
+
+    handleLogin = () => {
+        this.setState({
+            isLoggedIn: true
+        })
+    }
 
   getKList = () =>{
     var list= document.getElementById("list");
@@ -89,7 +129,11 @@ class App extends React.Component {
     return (
       <div className="App">
         {!this.state.isLoggedIn &&
-          <SignIn onClickLogin={this.handleLogin} />
+            <SignIn
+                onHandleSignUp={this.handleSuccessLogin}
+                onClickLogin={this.handleLogin}
+                firebase={firebase}
+            />
         }
         {this.state.isLoggedIn &&
             <div className={classes.root} >
@@ -143,6 +187,11 @@ class App extends React.Component {
                         </Route>
                     </Switch>
                 </Router>
+                <Snackbar open={this.state.snackbarSuccessSignUp} autoHideDuration={6000} onClose={this.snackBarHandleClose}>
+                    <Alert onClose={this.snackBarHandleClose} severity="success">
+                        You have successfully signed up!
+                    </Alert>
+                </Snackbar>
             </div>
         }
       </div>
