@@ -18,6 +18,9 @@ import {
   Route,
   Link
 } from "react-router-dom";
+// Firebase Imports
+import * as firebase from "firebase/app";
+require("firebase/auth");
 
 function Copyright() {
   return (
@@ -154,16 +157,38 @@ class SignIn extends React.Component {
             isSigningUp: false,
             isForgetPassword: false,
             isPasswordFilled: "Initial",
-            isEmailFilled: "Initial"
+            isEmailFilled: "Initial",
+            email:"",
+            password:"",
         });
 
     }
 
     componentDidUpdate(prevProps, prevState) {
         //If all correct, redirect to home page.
+        console.log(this.state.isEmailFilled);
+        console.log(this.state.isPasswordFilled);
         if(this.state.isEmailFilled === true && this.state.isPasswordFilled === true) {
-            this.props.onClickLogin()
+            // Firebase Authentication
+            console.log(this.state.email);
+            console.log(this.state.password);
+            firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then((user) => this.props.onClickLogin())
+            .catch((error) => this.handleAuthError(error));
         }
+    }
+
+    handleAuthError = (error) => {
+        console.log("runnings")
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+
+        this.setState({
+            isPasswordFilled: "Initial",
+            isEmailFilled: "Initial",
+        })
     }
 
     handleSignUpLink = () => {
@@ -190,7 +215,8 @@ class SignIn extends React.Component {
             })
         } else {
             this.setState({
-                isEmailFilled: true
+                isEmailFilled: true,
+                email: email,
             })
         }
         // Check Password
@@ -200,7 +226,8 @@ class SignIn extends React.Component {
             });
         } else {
             this.setState({
-                isPasswordFilled: true
+                isPasswordFilled: true,
+                password: password,
             })
         }
     }
