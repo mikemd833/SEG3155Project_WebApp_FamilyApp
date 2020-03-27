@@ -38,10 +38,11 @@ const styles = (theme) => ({
     },
     SubButton: {
         background: '#7FC4FD',
+        color: 'white',
         '&:hover': {
             backgroundColor: "#2699FB",
+            
         }
-
     },
     gridListItem: {
         padding: theme.spacing(1),
@@ -58,7 +59,7 @@ class ShoppingListPage extends React.Component {
         }
         getKList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Protein</li><li>Broccoli</li><li>Rice</li><li>Chicken</li>"
+            list.innerHTML="<li>Protein</li><li>Broccoli</li><li>Rice</li><li>Chicken</li><li>Pasta</li>"
         }
         getMList(){
             var list = document.getElementById("list");
@@ -129,6 +130,7 @@ class ShoppingListPage extends React.Component {
                             <Typography variant="h5" component="h2">Shopping List</Typography>
                                 <font size="4">
                                 <ul id="list" style={{overflow:"auto"}}>
+                                <li>Protein</li><li>Broccoli</li><li>Rice</li><li>Chicken</li><li>Pasta</li>
                                 </ul>
                                 </font>
                         </Paper>
@@ -136,7 +138,7 @@ class ShoppingListPage extends React.Component {
                             <TextField id="input" label="Please Type Here" style={{width:"50%", float: "left"}} />
                             <Button className={classes.SubButton} style={{width: "50%", float: "right"}} onClick={() => this.addList()}>
                                 <font size="4">
-                                 Add to List
+                                 Add to Shopping List
                                 </font>
                             </Button>
                         </div>

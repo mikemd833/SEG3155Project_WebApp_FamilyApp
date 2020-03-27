@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 // Stream Chat React Modules
-import { Chat, Channel, ChannelHeader, Thread, Window } from 'stream-chat-react';
+import { Chat, Channel, ChannelHeader, Thread} from 'stream-chat-react';
 import { MessageList, MessageInput } from 'stream-chat-react';
 import { StreamChat } from 'stream-chat';
 import 'stream-chat-react/dist/css/index.css';

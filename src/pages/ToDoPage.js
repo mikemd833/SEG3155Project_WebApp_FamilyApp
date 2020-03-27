@@ -38,10 +38,11 @@ const styles = (theme) => ({
     },
     SubButton: {
         background: '#7FC4FD',
+        color: 'white',
         '&:hover': {
             backgroundColor: "#2699FB",
+            
         }
-
     },
     gridListItem: {
         padding: theme.spacing(1),
@@ -69,7 +70,7 @@ class ToDoPage extends React.Component {
         }
         getMiguelList(){
             var list = document.getElementById("list");
-            list.innerHTML="<li>Clean the living room</li><li>Renew bus pass</li><li>Peppers</li><li>Mushrooms</li>"
+            list.innerHTML="<li>Clean the living room</li><li>Renew bus pass</li><li>Submit report</li>"
         }
         getAList(){
             var list = document.getElementById("list");
@@ -128,6 +129,7 @@ class ToDoPage extends React.Component {
                             <Typography variant="h5" component="h2">To Do List</Typography>
                                 <font size="4">
                                 <ul id="list" style={{overflow:"auto"}}>
+                                <li>Take out the garbage</li><li>Clean the kitchen</li><li>Finish database A2</li>
                                 </ul>
                                 </font>
                         </Paper>
@@ -135,7 +137,7 @@ class ToDoPage extends React.Component {
                             <TextField id="input" label="Please Type Here" style={{width:"50%", float: "left"}} />
                             <Button className={classes.SubButton} style={{width: "50%", float: "right"}} onClick={() => this.addList()}>
                                 <font size="4">
-                                 Add to List
+                                Add to TODO List
                                 </font>
                             </Button>
                         </div>
