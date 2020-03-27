@@ -18,6 +18,11 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+// Stream Chat React Modules
+import { Chat, Channel, Thread} from 'stream-chat-react';
+import { MessageList, MessageInput } from 'stream-chat-react';
+import { StreamChat } from 'stream-chat';
+import 'stream-chat-react/dist/css/index.css';
 
 const styles = (theme) => ({
     root: {
@@ -33,6 +38,7 @@ const styles = (theme) => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
         height: 500,
+        overflow: "auto"
     },
     paperRight: {
         padding: theme.spacing(2),
@@ -42,7 +48,7 @@ const styles = (theme) => ({
     },
     media: {
         height: 400,
-      },
+      }
   });
 
 
@@ -50,13 +56,30 @@ class HomePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          data: appointments,
-          currentViewName: 'Week',
+            data: appointments,
+            currentViewName: 'Week',
+            chatClient: new StreamChat('4j9h2uxtma94'),
+            userToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiY29sZC1tYXRoLTUifQ.Q4LVm_4R8Hi3xLXtpdSVAFR92C2cwXk9_HxVLW7Lq08',
+            selectedUser: 'FamilyChat'
         };
+        // Chat boilerplate
+        this.state.chatClient.setUser(
+            {
+                id: 'cold-math-5',
+                name: 'Cold math',
+                image: 'https://getstream.io/random_svg'
+            },
+            this.state.userToken,
+        );
     }
     render() {
         const { classes } = this.props;
         const { data, currentViewName } = this.state;
+        const channel = this.state.chatClient.channel('messaging', this.state.selectedUser, {
+            // add as many custom fields as you'd like
+            image: 'https://getstream.io/random_svg',
+            name: this.state.selectedUser,
+        });
         return (
             <div className={classes.root}>
                 <Grid container spacing={3}>
@@ -80,7 +103,22 @@ class HomePage extends React.Component {
                                 </Paper>
                             </Grid>
                             <Grid item xs={12}>
-                                <Paper className={classes.paperLeft}>Family Chat</Paper>
+                                <Paper className={classes.paperLeft}>
+                                    <div className="str-chat" style={{ height: '100px' }}>
+                                        <Chat client={this.state.chatClient}>
+                                            <Channel channel={channel}>
+                                                <div className="str-chat__main-panel" style={{ height: '400px' }}>
+                                                    <MessageList />
+                                                    <MessageInput />
+                                                </div>
+                                            <Thread />
+                                            </Channel>
+                                        </Chat>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            The Family Chat
+                                        </Typography>
+                                    </div>
+                                </Paper>
                             </Grid>
                         </Grid>
                     </Grid>
