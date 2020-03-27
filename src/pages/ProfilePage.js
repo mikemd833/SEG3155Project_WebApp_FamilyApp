@@ -66,6 +66,7 @@ const styles = (theme) => ({
 class ProfilePage extends React.Component {
     constructor(props) {
         super(props);
+        this.changeProfile=this.changeProfile.bind(this);
         this.state = ({
             selectedDate: new Date('1969-04-20T21:11:54'),
             setSelectedDate: new Date('1969-04-20T21:11:54')
@@ -75,6 +76,11 @@ class ProfilePage extends React.Component {
     handleDateChange = date => {
         this.state.setSelectedDate(date);
       };
+
+      changeProfile(){
+        var name = document.getElementById("Name").value;
+        document.getElementById("Name").label=name;
+      }
 
     render() {
         const { classes } = this.props;
@@ -109,21 +115,20 @@ class ProfilePage extends React.Component {
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
                                 <Paper className={classes.paperRight}> 
-                                <form>
 					                <table>
 			   			                <tbody>
                                                <font size="6">
 			    	    	                <tr>
 			            		                <td>Name:	</td>
-                                                <td><TextField id="Name" value="Karim Karoui" /> </td>
+                                                <td><TextField id="Name" label="Karim Karoui" /> </td>
 			        		                </tr>
 			        		                <tr>
 			            		                <td>Address:	</td>
-			            		                <td><TextField id="Address" value="Awesome St" /> </td>
+			            		                <td><TextField id="Address" label="Awesome St" /> </td>
 			        		                </tr>
 			        		                <tr>
 			            		                <td>Email:	</td>
-			            		                <td><TextField id="Email" value="awesome@awesome.com" /> </td>
+			            		                <td><TextField id="Email" label="awesome@awesome.com" /> </td>
 			        		                </tr>
 			        		                <tr>
 			            		                <td>Birthday:	</td>
@@ -152,16 +157,22 @@ class ProfilePage extends React.Component {
                                                     type="password"
                                                     autoComplete="current-password"/>
                                                 </td>
+                                                <td>
+                                                <TextField
+                                                    id="Confirm Password"
+                                                    label="Confirm Password"
+                                                    type="password"
+                                                    autoComplete="current-password"/>
+                                                </td>
                                             </tr>
                                             </font>
 			    		                </tbody>
 					                </table>
-					                    <Button type="submit" className={classes.SubButton} style={{width: "50%", float: "left"}}>
+					                    <Button className={classes.SubButton} style={{width: "50%", float: "left"}} onClick={() => this.changeProfile()}>
                                             <font size="4">
                                                 Save Changes
                                             </font>
                                         </Button>
-				                </form>
                                 </Paper>
                             </Grid>
                         </Grid>
