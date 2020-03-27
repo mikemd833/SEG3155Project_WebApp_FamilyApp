@@ -172,14 +172,12 @@ class HomePage extends React.Component {
                                         To Do
                                     </Typography>
                                     <font size="6">
-                                    <ul id="list" style={{maxHeight: 200, overflow:"auto"}}>
-                                        <li>Protein</li>
-                                        <li>Broccoli</li>
-                                        <li>Rice</li>
-                                        <li>Chicken</li>
-                                        <li>Pasta</li>
-                                    </ul>
-                                </font>
+                                        <ul id="list" style={{overflow:"auto"}}>
+                                            <li>Take out the garbage</li>
+                                            <li>Clean the kitchen</li>
+                                            <li>Finish database A2</li>
+                                        </ul>
+                                    </font>
                                 </Paper>
                             </Grid>
                             <Grid item xs={12}>
