@@ -30,7 +30,11 @@ const styles = (theme) => ({
     marginTop: theme.spacing(1),
   },
   submit: {
+    backgroundColor: "#7FC4FD",
     margin: theme.spacing(3, 0, 2),
+    '&:hover': {
+        backgroundColor: "#2699FB",
+    }
   },
 });
 
