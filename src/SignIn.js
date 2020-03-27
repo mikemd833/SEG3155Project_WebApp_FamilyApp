@@ -28,7 +28,7 @@ function Copyright() {
         {'Copyright © '}
         <Router>
             <Link to="/" color="inherit" href="https://material-ui.com/">
-                Your Website
+                SEG3125A
             </Link>{' '}
         </Router>
         {new Date().getFullYear()}
@@ -265,15 +265,6 @@ class SignIn extends React.Component {
                                     Don't have an account? Sign Up
                                 </Link>
                             </Grid>
-                            <Button
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                                onClick={() => this.props.onClickLogin()}
-                            >
-                                / Developer
-                            </Button>
                         </Grid>
                     }
                     {/*The Links to display on the signing up page*/}
