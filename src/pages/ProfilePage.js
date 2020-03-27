@@ -44,15 +44,20 @@ const styles = (theme) => ({
 
 class ProfilePage extends React.Component {
     constructor(props) {
-        super(props)    
-        
-        const handleDateChange = date => {
-            setSelectedDate(date);
-          };
+        super(props);
+        this.state = ({
+            selectedDate: new Date('2014-08-18T21:11:54'),
+            setSelectedDate: new Date('2014-08-18T21:11:54')
+        });
     }
+
+    handleDateChange = date => {
+        this.state.setSelectedDate(date);
+      };
+
     render() {
         const { classes } = this.props;
-        const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+        
         return (
             <div className={classes.root}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -96,8 +101,8 @@ class ProfilePage extends React.Component {
                                                     margin="normal"
                                                     id="date-picker-inline"
                                                     label="Date picker inline"
-                                                    value={selectedDate}
-                                                    onChange={handleDateChange}
+                                                    value={this.state.selectedDate}
+                                                    onChange={this.state.handleDateChange}
                                                     KeyboardButtonProps={{
                                                     'aria-label': 'change date',
                                                     }}
